@@ -9,6 +9,17 @@ window = tt.Screen()
 # A tartaruga
 my_turtle = tt.Turtle()
 
+
+
+board = tt.Turtle()
+
+board.forward(100) # draw base</font></font><font></font>
+board.left(90)
+board.forward(100)
+board.left(135)
+board.forward(142)
+tt.done()
+
 #Primitivas
 def retangulo(dados, largura, altura):
     window.exitonclick()
