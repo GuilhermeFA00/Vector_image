@@ -9,29 +9,59 @@ window = tt.Screen()
 # A tartaruga
 my_turtle = tt.Turtle()
 
-
-
-board = tt.Turtle()
-
-board.forward(100) # draw base</font></font><font></font>
-board.left(90)
-board.forward(100)
-board.left(135)
-board.forward(142)
-tt.done()
+lista_primitivas = []
 
 #Primitivas
 def retangulo(dados, largura, altura):
-    window.exitonclick()
+    my_turtle.forward(largura)
+    if orientacaoRet == "r":
+        my_turtle.right(ori_valor)
+    if orientacaoRet == "l":
+        my_turtle.left(ori_valor)
+    my_turtle.forward(altura)
+    if orientacaoRet == "r":
+        my_turtle.right(ori_valor)
+    if orientacaoRet == "l":
+        my_turtle.left(ori_valor)
+    my_turtle.forward(largura)
+    if orientacaoRet == "r":
+        my_turtle.right(ori_valor)
+    if orientacaoRet == "l":
+        my_turtle.left(ori_valor)
+    my_turtle.forward(altura)
 
-def poliReg(dados, lado, nlado):
-    window.exitonclick()
+def poliReg(dados, lado, nlados):
+    for ld in range(nlados):
+        my_turtle.forward(lado)
+        if orientacao == "r":
+            my_turtle.right(ori_valor / nlados)
+        if orientacao == "l":
+            my_turtle.left(ori_valor / nlados)
 
-def triangReto(dados, cateto1, cateto2):
-    window.exitonclick()
+def circulo(dados, raio):
+    if orientacao == "r":
+        my_turtle.right(ori_valor)
+        my_turtle.circle(raio)
+    if orientacao == "l":
+        my_turtle.left(ori_valor)
+        my_turtle.circle(raio)
 
-def circ(dados, raio):
-    window.exitonclick()
+def triangRet(dados, cateto1, cateto2):
+    if hip > valor_ctt1 and hip > valor_ctt2:
+        if orientacao == "r":
+            my_turtle.forward(cateto1)
+            my_turtle.right(ori_valor1)
+            my_turtle.forward(cateto2)
+            my_turtle.right(ori_valor2)
+            my_turtle.forward(hip)
+        if orientacao == "l":
+            my_turtle.forward(cateto1)
+            my_turtle.left(ori_valor1)
+            my_turtle.forward(cateto2)
+            my_turtle.left(ori_valor2)
+            my_turtle.forward(hip)
+    else:
+        print("Bicho, tu estudou matemática em marte? Hipotesuna > qualquer cateto")
 
 #Laço principal
 while True:
@@ -41,152 +71,88 @@ while True:
                          "Se não, digite 'Exit'\n"
                          "Se sim, digite 'Tartaruga': ").capitalize()
     if user_decisao == "Tartaruga":
-        esc_primitiva = input("Escolha uma primitiva para comerçarmos o desenho e para parar digite 'Bye'\n"
-                              "Para escolher o retângulo digite '1'\n"
-                              "Para escolher o poligono regular digite '2'\n"
-                              "Para escolher o quadrado digite '3'\n"
-                              "Para escolher o triângulo retângulo digite '4'\n").capitalize()
-        escPrim_list = list(esc_primitiva)
-        while esc_primitiva == "1" or esc_primitiva == "2" or esc_primitiva == "3" or esc_primitiva == "4":
-            lista_primitivas = []
-            print("Here we go!")
+        #Definindo o formato da tartaruga antes de escolhermos alguma primitiva
+        print("Vamos definir algumas coisas básicas antes de prosseguir")
+        dados_shape = input("Me diga o shape da caneta: ").lower()
+        caneta = my_turtle.shape(dados_shape)
+        dados_cor = input("Qual a cor de sua preferência? ")
+        cor = my_turtle.color(dados_cor)
+        while True:
+            esc_primitiva = input("Escolha uma primitiva para comerçarmos o desenho e para parar digite 'Bye'\n"
+                                  "Para escolher o retângulo digite '1'\n"
+                                  "Para escolher o poligono regular digite '2'\n"
+                                  "Para escolher o círculo digite '3'\n"
+                                  "Para escolher o triângulo retângulo digite '4'\n").capitalize()
             if esc_primitiva == "1":
-                # Inserindo informações dentro do parâmetro dados
-                dados_shape = input("Me diga o shape da caneta: ").lower()
-                caneta = my_turtle.shape(dados_shape)
+                dados_posXret = float(input("Me diga a posição x da caneta: "))
+                dados_posYret = float(input("Me diga a posição y da caneta: "))
+                posicaoRet = my_turtle.goto(dados_posXret, dados_posYret)
 
-                dados_posX = float(input("Me diga a posição x da caneta: "))
-                dados_posY = float(input("Me diga a posição y da caneta: "))
-                posicao = my_turtle.goto(dados_posX, dados_posY)
+                ori_valor = float(input("Valor da orientação : "))
+                orientacaoRet = input("Orintação: ")
 
-                #Decisão do usuário por qual orientação seguir
-                orientacao = my_turtle
-                x = 0
-                while x < 4:
-                    ori_decisao = input("Qual orientação quer seguir agora? ")
-                    ori_valor = float(input("Qual o valor da orientação agora? "))
-                    if ori_decisao == "r":
-                        orientacao = my_turtle.right(ori_valor)
-                        info_largura = float(input("Me diga o valor da largura: "))
-                        info_altura = float(input("Me diga a altura: "))
-                    if ori_decisao == "l":
-                        orientacao = my_turtle.left(ori_valor)
-                        info_largura = float(input("Me diga o valor da largura: "))
-                        info_altura = float(input("Me diga a altura: "))
+                Largura = float(input("Qual a largura ? "))
+                Altura = float(input("Qual a altura ? "))
 
-                    x+=1
-
-                dados_cor = input("Qual a cor de sua preferência? ")
-                cor = my_turtle.color(dados_cor)
-
-                Dados = (caneta, posicao, orientacao, cor)
-
-
-                # Largura e Altura
-                Largura = my_turtle.forward(info_largura)
-
-                Altura = my_turtle.forward(info_altura)
-
-                retangulo(Dados, Largura, Altura)
-                lista_primitivas.insert(escPrim_list[1])
+                tupla_dados = (caneta, posicaoRet, orientacaoRet, cor)
+                retangulo(tupla_dados, Largura, Altura)
+                lista_primitivas.append([(dados_shape, dados_cor, dados_posXret, dados_posYret, ori_valor, orientacaoRet ), Largura, Altura])
 
             if esc_primitiva == "2":
-                # Inserindo informações dentro do parâmetro dados
-                dados_shape = input("Me diga o shape da caneta: ").lower()
-                caneta = my_turtle.shape(dados_shape)
-
                 dados_posX = float(input("Me diga a posição x da caneta: "))
                 dados_posY = float(input("Me diga a posição y da caneta: "))
                 posicao = my_turtle.goto(dados_posX, dados_posY)
 
-                # Decisão do usuário por qual orientação seguir
-                orientacao = my_turtle
-                x = 0
-                while x < 4:
-                    ori_decisao = input("Qual orientação quer seguir agora? ")
-                    ori_valor = float(input("Qual o valor da orientação agora? "))
-                    if ori_decisao == "r":
-                        orientacao = my_turtle.right(ori_valor)
-                    if ori_decisao == "l":
-                        orientacao = my_turtle.left(ori_valor)
-                    x += 1
+                ori_valor = 360
+                orientacao = input("Orintação: ")
 
-                dados_cor = input("Qual a cor de sua preferência? ")
-                cor = my_turtle.color(dados_cor)
+                num_lados = int(input("Qual o número de lados do nosso polígone? "))
+                tam_lado = float(input("O tamanho, por favor? "))
 
-                Dados = (caneta, posicao, orientacao, cor)
-
-                #Lados e número de lados
-                lista_primitivas.insert(escPrim_list[2])
+                tupla_dados = (caneta, posicao, orientacao, cor)
+                poliReg(tupla_dados, tam_lado, num_lados)
+                lista_primitivas.append([tupla_dados, num_lados, tam_lado])
 
             if esc_primitiva == "3":
-                # Inserindo informações dentro do parâmetro dados
-                dados_shape = input("Me diga o shape da caneta: ").lower()
-                caneta = my_turtle.shape(dados_shape)
-
                 dados_posX = float(input("Me diga a posição x da caneta: "))
                 dados_posY = float(input("Me diga a posição y da caneta: "))
                 posicao = my_turtle.goto(dados_posX, dados_posY)
 
-                # Decisão do usuário por qual orientação seguir
-                orientacao = my_turtle
-                x = 0
-                while x < 4:
-                    ori_decisao = input("Qual orientação quer seguir agora? ")
-                    ori_valor = float(input("Qual o valor da orientação agora? "))
-                    if ori_decisao == "r":
-                        orientacao = my_turtle.right(ori_valor)
-                    if ori_decisao == "l":
-                        orientacao = my_turtle.left(ori_valor)
-                    x += 1
+                ori_valor = float(input("Valor da orientação : "))
+                orientacao = input("Orintação: ")
 
-                dados_cor = input("Qual a cor de sua preferência? ")
-                cor = my_turtle.color(dados_cor)
+                valor_raio = float(input("Diga o raio, diga:  "))
 
-                Dados = (caneta, posicao, orientacao, cor)
+                tupla_dados = (caneta, posicao, orientacao, cor)
+                circulo(tupla_dados, valor_raio)
+                lista_primitivas.append([tupla_dados, valor_raio])
 
-                lista_primitivas.insert(escPrim_list[3])
-
-            if esc_primitiva =="4":
-                # Inserindo informações dentro do parâmetro dados
-                dados_shape = input("Me diga o shape da caneta: ").lower()
-                caneta = my_turtle.shape(dados_shape)
-
+            if esc_primitiva == "4":
                 dados_posX = float(input("Me diga a posição x da caneta: "))
                 dados_posY = float(input("Me diga a posição y da caneta: "))
                 posicao = my_turtle.goto(dados_posX, dados_posY)
 
-                # Decisão do usuário por qual orientação seguir
-                orientacao = my_turtle
-                x = 0
-                while x < 4:
-                    ori_decisao = input("Qual orientação quer seguir agora? ")
-                    ori_valor = float(input("Qual o valor da orientação agora? "))
-                    if ori_decisao == "r":
-                        orientacao = my_turtle.right(ori_valor)
-                    if ori_decisao == "l":
-                        orientacao = my_turtle.left(ori_valor)
-                    x += 1
+                ori_valor1 = float(input("Valor da orientação : "))
+                ori_valor2 = float(input("Valor da orientação : "))
+                orientacao = input("Orintação: ")
 
-                dados_cor = input("Qual a cor de sua preferência? ")
-                cor = my_turtle.color(dados_cor)
+                valor_ctt1 = float(input("Diga o primeiro cateto, digaaa: "))
+                valor_ctt2 = float(input("Diga o segundo cateto, digaaa: "))
+                hip = float(input("Hipotenusa, por favor: "))
 
-                Dados = (caneta, posicao, orientacao, cor)
+                tupla_dados = (caneta, posicao, orientacao, cor)
+                triangRet(tupla_dados, valor_ctt1, valor_ctt2)
+                lista_primitivas.append([tupla_dados, valor_ctt1, valor_ctt2, hip])
 
-                lista_primitivas.insert(escPrim_list[4])
-
-            quer_cont = input("Quer continuar ou voltar ao menu? ").capitalize()
-            if quer_cont == "Sim":
-                print("Yeahhhhh")
-            if quer_cont == "Nao":
-                    break
             if esc_primitiva == "Bye":
+                print("Voltando ao menu...")
                 break
             else:
-                print("Usuário,por favor,siga as regras...")
-
+                print("Por favor user, siga as regras...")
     if user_decisao == "Exit":
         print("Valeuuu")
         break
     if user_decisao != "Tartaruga" and user_decisao != "Exit":
-        print("Eu falei em romeno com você?? É exit ou tartaruga!!!!!!!!!!!!!!!!")
+        print("Eu falei em romeno com você?? É exit ou tartaruga!!!!!!!!!!!!!!!")
+window.exitonclick()
+print(lista_primitivas)
