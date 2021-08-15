@@ -13,40 +13,47 @@ lista_primitivas = []
 
 #Primitivas
 def retangulo(dados, largura, altura):
+    my_turtle.begin_fill()
     my_turtle.forward(largura)
-    if orientacaoRet == "r":
+    if orientacao == "r":
         my_turtle.right(ori_valor)
-    if orientacaoRet == "l":
+    if orientacao == "l":
         my_turtle.left(ori_valor)
     my_turtle.forward(altura)
-    if orientacaoRet == "r":
+    if orientacao == "r":
         my_turtle.right(ori_valor)
-    if orientacaoRet == "l":
+    if orientacao == "l":
         my_turtle.left(ori_valor)
     my_turtle.forward(largura)
-    if orientacaoRet == "r":
+    if orientacao == "r":
         my_turtle.right(ori_valor)
-    if orientacaoRet == "l":
+    if orientacao == "l":
         my_turtle.left(ori_valor)
     my_turtle.forward(altura)
+    my_turtle.end_fill()
 
 def poliReg(dados, lado, nlados):
+    my_turtle.begin_fill()
     for ld in range(nlados):
         my_turtle.forward(lado)
         if orientacao == "r":
             my_turtle.right(ori_valor / nlados)
         if orientacao == "l":
             my_turtle.left(ori_valor / nlados)
+    my_turtle.end_fill()
 
 def circulo(dados, raio):
+    my_turtle.begin_fill()
     if orientacao == "r":
         my_turtle.right(ori_valor)
         my_turtle.circle(raio)
     if orientacao == "l":
         my_turtle.left(ori_valor)
         my_turtle.circle(raio)
+    my_turtle.end_fill()
 
 def triangRet(dados, cateto1, cateto2):
+    my_turtle.begin_fill()
     if hip > valor_ctt1 and hip > valor_ctt2:
         if orientacao == "r":
             my_turtle.forward(cateto1)
@@ -62,6 +69,29 @@ def triangRet(dados, cateto1, cateto2):
             my_turtle.forward(hip)
     else:
         print("Bicho, tu estudou matemática em marte? Hipotesuna > qualquer cateto")
+    my_turtle.end_fill()
+
+#Dicionários com as cores e formatos do módulo Turtle
+colors = {
+    'red' : "red",
+    'blue' : "blue",
+    'green' : "green",
+    'white' : "white",
+    'yellow' : "yellow",
+    'pink' : "pink",
+    'lightblue' : "lightblue",
+    'lightgrey' : "lightgrey",
+    'grey' : "grey",
+    'darkblue': "darkblue",
+    'lightgreen': "lightgreen"
+}
+
+shape = {
+    'turtle': "turtle",
+    'circle': "circle",
+    'classic': "classic",
+    'arrow': "arrow"
+}
 
 #Laço principal
 while True:
@@ -72,11 +102,15 @@ while True:
                          "Se sim, digite 'Tartaruga': ").capitalize()
     if user_decisao == "Tartaruga":
         #Definindo o formato da tartaruga antes de escolhermos alguma primitiva
-        print("Vamos definir algumas coisas básicas antes de prosseguir")
-        dados_shape = input("Me diga o shape da caneta: ").lower()
+        print("Vamos definir o formato de seu cágado antes proseguirmos")
+        while True:
+            dados_shape = input("Me diga o shape da caneta: ").lower()
+            if dados_shape in shape:
+                break
+            else:
+                print("Olhe os formatos !")
+                print(shape)
         caneta = my_turtle.shape(dados_shape)
-        dados_cor = input("Qual a cor de sua preferência? ")
-        cor = my_turtle.color(dados_cor)
         while True:
             esc_primitiva = input("Escolha uma primitiva para comerçarmos o desenho e para parar digite 'Bye'\n"
                                   "Para escolher o retângulo digite '1'\n"
@@ -84,21 +118,63 @@ while True:
                                   "Para escolher o círculo digite '3'\n"
                                   "Para escolher o triângulo retângulo digite '4'\n").capitalize()
             if esc_primitiva == "1":
-                dados_posXret = float(input("Me diga a posição x da caneta: "))
-                dados_posYret = float(input("Me diga a posição y da caneta: "))
-                posicaoRet = my_turtle.goto(dados_posXret, dados_posYret)
+                while True:
+                    dados_cor = input("Qual a cor de sua preferência? ")
+                    if dados_cor in colors:
+                        break
+                    else:
+                        print("Olhe as cores disponiveis")
+                        print(colors)
+                cor = my_turtle.fillcolor(dados_cor)
 
-                ori_valor = float(input("Valor da orientação : "))
-                orientacaoRet = input("Orintação: ")
+                while True:
+                    try:
+                        dados_posX = float(input("Me diga a posição x da caneta: "))
+                        break
+                    except:
+                        print("Isso não é um número")
+                while True:
+                    try:
+                        dados_posY = float(input("Me diga a posição Y da caneta: "))
+                        break
+                    except:
+                        print("Isso não é um número")
+                posicao = my_turtle.goto(dados_posX, dados_posY)
 
-                Largura = float(input("Qual a largura ? "))
-                Altura = float(input("Qual a altura ? "))
+                while True:
+                    try:
+                        ori_valor = float(input("Valor da orientação : "))
+                        break
+                    except:
+                        print("Isso não é um número")
+                while True:
+                    orientacao = input("Orintação('l' para left e 'r' para right): ").lower()
+                    if orientacao != "r" and orientacao != "l":
+                        print("Sr, l ou r, por favor")
+                    else:
+                        break
 
-                tupla_dados = (caneta, posicaoRet, orientacaoRet, cor)
+                while True:
+                    try:
+                        Largura = float(input("Qual a largura ? "))
+                        break
+                    except:
+                        print("Isso não é um número")
+                while True:
+                    try:
+                        Altura = float(input("Qual a altura ? "))
+                        break
+                    except:
+                        print("Isso não é um número")
+
+                tupla_dados = (caneta, posicao, orientacao, cor)
                 retangulo(tupla_dados, Largura, Altura)
-                lista_primitivas.append([(dados_shape, dados_cor, dados_posXret, dados_posYret, ori_valor, orientacaoRet ), Largura, Altura])
+                lista_primitivas.append([(dados_shape, dados_cor, dados_posX, dados_posY, ori_valor, orientacao), Largura, Altura])
 
             if esc_primitiva == "2":
+                dados_cor = input("Qual a cor de sua preferência? ")
+                cor = my_turtle.fillcolor(dados_cor)
+
                 dados_posX = float(input("Me diga a posição x da caneta: "))
                 dados_posY = float(input("Me diga a posição y da caneta: "))
                 posicao = my_turtle.goto(dados_posX, dados_posY)
@@ -111,9 +187,12 @@ while True:
 
                 tupla_dados = (caneta, posicao, orientacao, cor)
                 poliReg(tupla_dados, tam_lado, num_lados)
-                lista_primitivas.append([tupla_dados, num_lados, tam_lado])
+                lista_primitivas.append([(dados_shape, dados_cor, dados_posX, dados_posY, ori_valor, orientacao), num_lados, tam_lado])
 
             if esc_primitiva == "3":
+                dados_cor = input("Qual a cor de sua preferência? ")
+                cor = my_turtle.fillcolor(dados_cor)
+
                 dados_posX = float(input("Me diga a posição x da caneta: "))
                 dados_posY = float(input("Me diga a posição y da caneta: "))
                 posicao = my_turtle.goto(dados_posX, dados_posY)
@@ -125,9 +204,12 @@ while True:
 
                 tupla_dados = (caneta, posicao, orientacao, cor)
                 circulo(tupla_dados, valor_raio)
-                lista_primitivas.append([tupla_dados, valor_raio])
+                lista_primitivas.append([(dados_shape, dados_cor, dados_posX, dados_posY, ori_valor, orientacao), valor_raio])
 
             if esc_primitiva == "4":
+                dados_cor = input("Qual a cor de sua preferência? ")
+                cor = my_turtle.fillcolor(dados_cor)
+
                 dados_posX = float(input("Me diga a posição x da caneta: "))
                 dados_posY = float(input("Me diga a posição y da caneta: "))
                 posicao = my_turtle.goto(dados_posX, dados_posY)
@@ -142,7 +224,7 @@ while True:
 
                 tupla_dados = (caneta, posicao, orientacao, cor)
                 triangRet(tupla_dados, valor_ctt1, valor_ctt2)
-                lista_primitivas.append([tupla_dados, valor_ctt1, valor_ctt2, hip])
+                lista_primitivas.append([(dados_shape, dados_cor, dados_posX, dados_posY, ori_valor1, ori_valor2, orientacao), valor_ctt1, valor_ctt2, hip])
 
             if esc_primitiva == "Bye":
                 print("Voltando ao menu...")
