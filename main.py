@@ -172,15 +172,37 @@ while True:
                 lista_primitivas.append([(dados_shape, dados_cor, dados_posX, dados_posY, ori_valor, orientacao), Largura, Altura])
 
             if esc_primitiva == "2":
-                dados_cor = input("Qual a cor de sua preferência? ")
+                while True:
+                    dados_cor = input("Qual a cor de sua preferência? ")
+                    if dados_cor in colors:
+                        break
+                    else:
+                        print("Olhe as cores disponiveis")
+                        print(colors)
                 cor = my_turtle.fillcolor(dados_cor)
 
-                dados_posX = float(input("Me diga a posição x da caneta: "))
-                dados_posY = float(input("Me diga a posição y da caneta: "))
+                while True:
+                    try:
+                        dados_posX = float(input("Me diga a posição x da caneta: "))
+                        break
+                    except:
+                        print("Isso não é um número")
+                while True:
+                    try:
+                        dados_posY = float(input("Me diga a posição Y da caneta: "))
+                        break
+                    except:
+                        print("Isso não é um número")
                 posicao = my_turtle.goto(dados_posX, dados_posY)
 
                 ori_valor = 360
-                orientacao = input("Orintação: ")
+
+                while True:
+                    orientacao = input("Orintação('l' para left e 'r' para right): ").lower()
+                    if orientacao != "r" and orientacao != "l":
+                        print("Sr, l ou r, por favor")
+                    else:
+                        break
 
                 num_lados = int(input("Qual o número de lados do nosso polígone? "))
                 tam_lado = float(input("O tamanho, por favor? "))
@@ -190,37 +212,113 @@ while True:
                 lista_primitivas.append([(dados_shape, dados_cor, dados_posX, dados_posY, ori_valor, orientacao), num_lados, tam_lado])
 
             if esc_primitiva == "3":
-                dados_cor = input("Qual a cor de sua preferência? ")
+                while True:
+                    dados_cor = input("Qual a cor de sua preferência? ")
+                    if dados_cor in colors:
+                        break
+                    else:
+                        print("Olhe as cores disponiveis")
+                        print(colors)
                 cor = my_turtle.fillcolor(dados_cor)
 
-                dados_posX = float(input("Me diga a posição x da caneta: "))
-                dados_posY = float(input("Me diga a posição y da caneta: "))
+                while True:
+                    try:
+                        dados_posX = float(input("Me diga a posição x da caneta: "))
+                        break
+                    except:
+                        print("Isso não é um número")
+                while True:
+                    try:
+                        dados_posY = float(input("Me diga a posição Y da caneta: "))
+                        break
+                    except:
+                        print("Isso não é um número")
                 posicao = my_turtle.goto(dados_posX, dados_posY)
 
-                ori_valor = float(input("Valor da orientação : "))
-                orientacao = input("Orintação: ")
-
-                valor_raio = float(input("Diga o raio, diga:  "))
+                while True:
+                    try:
+                        ori_valor = float(input("Valor da orientação : "))
+                        break
+                    except:
+                        print("Isso não é um número")
+                while True:
+                    orientacao = input("Orintação('l' para left e 'r' para right): ").lower()
+                    if orientacao != "r" and orientacao != "l":
+                        print("Sr, l ou r, por favor")
+                    else:
+                        break
+                while True:
+                    try:
+                        valor_raio = float(input("Diga o raio, diga:  "))
+                        break
+                    except:
+                        print("Isso não é um número")
 
                 tupla_dados = (caneta, posicao, orientacao, cor)
                 circulo(tupla_dados, valor_raio)
                 lista_primitivas.append([(dados_shape, dados_cor, dados_posX, dados_posY, ori_valor, orientacao), valor_raio])
 
             if esc_primitiva == "4":
-                dados_cor = input("Qual a cor de sua preferência? ")
+                while True:
+                    dados_cor = input("Qual a cor de sua preferência? ")
+                    if dados_cor in colors:
+                        break
+                    else:
+                        print("Olhe as cores disponiveis")
+                        print(colors)
                 cor = my_turtle.fillcolor(dados_cor)
 
-                dados_posX = float(input("Me diga a posição x da caneta: "))
-                dados_posY = float(input("Me diga a posição y da caneta: "))
+                while True:
+                    try:
+                        dados_posX = float(input("Me diga a posição x da caneta: "))
+                        break
+                    except:
+                        print("Isso não é um número")
+                while True:
+                    try:
+                        dados_posY = float(input("Me diga a posição Y da caneta: "))
+                        break
+                    except:
+                        print("Isso não é um número")
                 posicao = my_turtle.goto(dados_posX, dados_posY)
 
-                ori_valor1 = float(input("Valor da orientação : "))
-                ori_valor2 = float(input("Valor da orientação : "))
-                orientacao = input("Orintação: ")
+                while True:
+                    try:
+                        ori_valor1 = float(input("Valor da orientação : "))
+                        break
+                    except:
+                        print("Isso não é um número")
+                while True:
+                    try:
+                        ori_valor2 = float(input("Valor da orientação : "))
+                        break
+                    except:
+                        print("Isso não é um número")
+                while True:
+                    orientacao = input("Orintação('l' para left e 'r' para right): ").lower()
+                    if orientacao != "r" and orientacao != "l":
+                        print("Sr, l ou r, por favor")
+                    else:
+                        break
 
-                valor_ctt1 = float(input("Diga o primeiro cateto, digaaa: "))
-                valor_ctt2 = float(input("Diga o segundo cateto, digaaa: "))
-                hip = float(input("Hipotenusa, por favor: "))
+                while True:
+                    try:
+                        valor_ctt1 = float(input("Diga o primeiro cateto, digaaa: "))
+                        break
+                    except:
+                        print("Isso não é um número")
+                while True:
+                    try:
+                        valor_ctt2 = float(input("Diga o segundo cateto, digaaa: "))
+                        break
+                    except:
+                        print("Isso não é um número")
+                while True:
+                    try:
+                        hip = float(input("Hipotenusa, por favor: "))
+                        break
+                    except:
+                        print("Isso não é um número")
 
                 tupla_dados = (caneta, posicao, orientacao, cor)
                 triangRet(tupla_dados, valor_ctt1, valor_ctt2)
